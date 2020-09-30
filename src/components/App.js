@@ -89,7 +89,7 @@ function handleCardDelete(card){
 }
 
 function handleAddPlaceSubmit(card){
-api.createCards(card).then((newCard)=>setCards([...cards, newCard]));
+api.createCards(card).then((newCard)=>setCards([newCard, ...cards]));
 closeAllPopups();
 }
 
