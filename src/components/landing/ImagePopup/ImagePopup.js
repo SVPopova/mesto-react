@@ -1,7 +1,8 @@
 import React from "react";
+
 function ImagePopup(props) {
+  
   return (
-    <>
       <section className={`popup popup_type_${props.name} ${props.isOpen}`}>
         <figure className="popup__container popup__container_figure">
           <button
@@ -17,7 +18,6 @@ function ImagePopup(props) {
           <figcaption className="popup__text">{props.card.title}</figcaption>
         </figure>
       </section>
-    </>
   );
 }
 
