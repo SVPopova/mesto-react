@@ -6,7 +6,7 @@ import { CurrentUserContext } from "../../../context/CurrentUserContext";
 
 function Main(props) {
   const currentUser = React.useContext(CurrentUserContext);
-  
+
   return (
     <>
       <section className="profile">
@@ -39,7 +39,13 @@ function Main(props) {
       </section>
       <section className="elements">
         {props.cards.map((card) => (
-          <Cards onCardLike={props.onCardLike} key={card._id} onCardClick={props.onSelectedCard} onCardDelete={props.onCardDelete} card={card} />
+          <Cards
+            onCardLike={props.onCardLike}
+            key={card._id}
+            onCardClick={props.onSelectedCard}
+            onCardDelete={props.onCardDelete}
+            card={card}
+          />
         ))}
       </section>
       <PopupWithForm

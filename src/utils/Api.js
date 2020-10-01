@@ -1,3 +1,10 @@
+const handleResponse = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`); // если ошибка, отклоняем промис
+};
+
 class Api {
   constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
@@ -7,12 +14,7 @@ class Api {
     return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`); // если ошибка, отклоняем промис
-      })
+      .then(handleResponse)
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
@@ -22,12 +24,7 @@ class Api {
       method: "GET",
       headers: this.headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`); // если ошибка, отклоняем промис
-      })
+      .then(handleResponse)
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
@@ -37,24 +34,18 @@ class Api {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify({ name: data.name, link: data.link }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    })
+      .then(handleResponse)
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      });
   }
   deleteCards(idCard) {
     return fetch(`${this.baseUrl}/cards/${idCard}`, {
       method: "DELETE",
       headers: this.headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`); // если ошибка, отклоняем промис
-      })
+      .then(handleResponse)
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
@@ -64,29 +55,18 @@ class Api {
       method: `${isLiked ? "PUT" : "DELETE"}`,
       headers: this.headers,
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`); // если ошибка, отклоняем промис
-      })
+      .then(handleResponse)
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
   }
-  
   changeAvatar(data) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({ avatar: data.avatar }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`); // если ошибка, отклоняем промис
-      })
+      .then(handleResponse)
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
@@ -97,12 +77,7 @@ class Api {
       headers: this.headers,
       body: JSON.stringify({ name: data.name, about: data.about }),
     })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`); // если ошибка, отклоняем промис
-      })
+      .then(handleResponse)
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
       });
